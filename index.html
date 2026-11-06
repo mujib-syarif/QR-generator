@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Buat QR Code gratis dengan cepat. Atur warna dan unduh sebagai PNG.">
+  <title>QR Studio - Free QR Code Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:light;--ink:#171923;--muted:#737887;--line:#e8eaf0;--blue:#5268e8;--blue-dark:#4054d4;--surface:#fff;--bg:#f7f8fc}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;min-height:100vh}
+    header{height:72px;border-bottom:1px solid var(--line);background:#ffffffd9;backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100vw - 1120px)/2));position:sticky;top:0;z-index:5}
+    .brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:800;letter-spacing:-.6px}.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--blue);display:grid;place-items:center;color:white;font-size:19px}
+    .tag{font-size:12px;font-weight:700;color:#5364d7;background:#eef0ff;padding:8px 12px;border-radius:30px}
+    main{max-width:1040px;margin:0 auto;padding:56px 22px 70px}.intro{text-align:center;margin-bottom:34px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.7px;font-weight:800;color:var(--blue)}h1{font-size:clamp(32px,5vw,48px);letter-spacing:-2px;margin:12px 0 10px;line-height:1.08}.intro p{margin:0;color:var(--muted);font-size:15px}
+    .workspace{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:20px;align-items:start}.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 8px 28px #20274708}.panel h2{font-size:16px;margin:0 0 21px;letter-spacing:-.3px}
+    label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.field{margin-bottom:19px}textarea,input,select{font:inherit}textarea{width:100%;min-height:116px;resize:vertical;border:1px solid #dfe2eb;border-radius:12px;padding:13px 14px;outline:none;color:var(--ink);font-size:14px;line-height:1.5}textarea:focus,input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #5268e81a}
+    .hint{font-size:11px;color:var(--muted);margin-top:7px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px}.control input[type=color]{width:100%;height:43px;padding:4px;border:1px solid #dfe2eb;border-radius:10px;background:white;cursor:pointer}.control select{width:100%;height:43px;border:1px solid #dfe2eb;border-radius:10px;padding:0 11px;background:white;color:var(--ink);font-size:13px}
+    .actions{display:flex;gap:10px;margin-top:5px}.btn{border:0;border-radius:11px;padding:13px 17px;font:700 13px "DM Sans",sans-serif;cursor:pointer;transition:.18s}.btn-primary{background:var(--blue);color:white;flex:1}.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}.btn-secondary{background:#f0f1f6;color:#404454}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+    .preview-panel{position:sticky;top:94px;text-align:center}.preview-panel h2{text-align:left;margin-bottom:17px}.qr-stage{min-height:270px;background:#f8f9fd;border:1px dashed #dfe2ed;border-radius:16px;display:grid;place-items:center;padding:22px}.qr-placeholder{color:#a0a5b3;font-size:13px}.qr-placeholder .symbol{font-size:45px;display:block;margin-bottom:10px;color:#c4c8d4}.qr-output{background:white;padding:13px;border-radius:12px;box-shadow:0 4px 18px #20274710;line-height:0;max-width:100%}.qr-output canvas,.qr-output img{max-width:100%;height:auto!important;display:block}.preview-note{font-size:11px;color:var(--muted);margin:14px 0 17px}.download{width:100%;padding:14px}.status{font-size:12px;color:#26845c;min-height:18px;margin-top:12px}
+    footer{text-align:center;color:#9297a4;font-size:12px;padding:0 20px 28px}footer strong{color:#626878}
+    @media(max-width:720px){header{height:62px;padding:0 17px}.brand{font-size:17px}main{padding:39px 15px 48px}.intro{margin-bottom:25px}.workspace{grid-template-columns:1fr}.panel{padding:20px;border-radius:17px}.preview-panel{position:static;order:-1}.qr-stage{min-height:230px}.preview-panel h2{margin-bottom:14px}.tag{font-size:10px;padding:7px 9px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="brand-mark">⌗</span> QR Studio</div>
+    <span class="tag">FREE · NO SUBSCRIPTION</span>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="eyebrow">Simple tools. Zero fuss.</div>
+      <h1>Your QR, your way.</h1>
+      <p>Buat QR Code sendiri. Gratis, cepat, dan bisa langsung diunduh.</p>
+    </section>
+    <section class="workspace">
+      <div class="panel">
+        <h2>1. Isi konten QR</h2>
+        <div class="field">
+          <label for="content">Teks atau URL</label>
+          <textarea id="content" maxlength="2000" placeholder="https://contoh.com">https://example.com</textarea>
+          <div class="hint">Masukkan link website, teks, atau informasi lain (maks. 2.000 karakter).</div>
+        </div>
+        <h2>2. Sesuaikan tampilan</h2>
+        <div class="controls">
+          <div class="field control">
+            <label for="foreground">Warna QR</label>
+            <input id="foreground" type="color" value="#171923">
+          </div>
+          <div class="field control">
+            <label for="background">Warna latar</label>
+            <input id="background" type="color" value="#ffffff">
+          </div>
+          <div class="field control">
+            <label for="size">Ukuran</label>
+            <select id="size"><option value="256">256 × 256</option><option value="384" selected>384 × 384</option><option value="512">512 × 512</option><option value="768">768 × 768</option></select>
+          </div>
+          <div class="field control">
+            <label for="level">Koreksi error</label>
+            <select id="level"><option value="L">Rendah</option><option value="M" selected>Menengah</option><option value="Q">Tinggi</option><option value="H">Maksimum</option></select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="generate">Generate QR Code</button>
+          <button class="btn btn-secondary" id="reset" type="button">Reset</button>
+        </div>
+      </div>
+      <aside class="panel preview-panel">
+        <h2>Preview QR Code</h2>
+        <div class="qr-stage">
+          <div id="placeholder" class="qr-placeholder"><span class="symbol">▦</span>QR Code akan muncul di sini</div>
+          <div id="qrcode" class="qr-output" hidden></div>
+        </div>
+        <p class="preview-note">Pastikan kontras warna cukup agar QR mudah dipindai.</p>
+        <button class="btn btn-primary download" id="download" disabled>Unduh PNG</button>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </aside>
+    </section>
+  </main>
+  <footer>Made for the web. <strong>Free to use.</strong></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const content = $("content"), output = $("qrcode"), placeholder = $("placeholder");
+    const levels = {L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H};
+    let ready = false;
+    function generate() {
+      const value = content.value.trim();
+      if (!value) { $("status").textContent = "Isi teks atau URL terlebih dahulu."; content.focus(); return; }
+      if (value.length > 2000) { $("status").textContent = "Konten terlalu panjang."; return; }
+      if (typeof QRCode === "undefined") { $("status").textContent = "QR engine gagal dimuat. Periksa koneksi internet."; return; }
+      output.innerHTML = "";
+      const size = Number($("size").value);
+      try {
+        new QRCode(output, {text:value,width:size,height:size,colorDark:$("foreground").value,colorLight:$("background").value,correctLevel:levels[$("level").value]});
+        output.hidden = false; placeholder.hidden = true; ready = true; $("download").disabled = false;
+        $("status").textContent = "QR Code berhasil dibuat.";
+      } catch (error) { ready = false; $("download").disabled = true; $("status").textContent = "Gagal membuat QR. Coba kurangi panjang konten."; }
+    }
+    $("generate").addEventListener("click", generate);
+    $("reset").addEventListener("click", () => { content.value = ""; $("foreground").value = "#171923"; $("background").value = "#ffffff"; $("size").value = "384"; $("level").value = "M"; output.innerHTML = ""; output.hidden = true; placeholder.hidden = false; ready = false; $("download").disabled = true; $("status").textContent = ""; content.focus(); });
+    $("download").addEventListener("click", () => {
+      if (!ready) return;
+      const canvas = output.querySelector("canvas");
+      const img = output.querySelector("img");
+      let url;
+      if (canvas) url = canvas.toDataURL("image/png");
+      else if (img && img.src) url = img.src;
+      else { $("status").textContent = "QR belum siap diunduh."; return; }
+      const link = document.createElement("a"); link.href = url; link.download = "qr-studio.png"; document.body.appendChild(link); link.click(); link.remove();
+    });
+    generate();
+  </script>
+</body>
+</html>
