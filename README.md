@@ -16,7 +16,7 @@ Open `index.html` in a browser. The QR engine is loaded from CDNJS, so an intern
 
 ## Deploy with GitHub Pages
 
-1. Open **Settings → Pages** in this repository.
+1. Open **Settings > Pages** in this repository.
 2. Select **Deploy from a branch**.
 3. Choose `main` and `/ (root)`, then save.
 
